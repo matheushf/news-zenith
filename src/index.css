@@ -1,0 +1,133 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 210 100% 55%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 215 25% 92%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 215 25% 92%;
+    --muted-foreground: 215 25% 45%;
+
+    --accent: 215 100% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 90%;
+    --input: 214 32% 90%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 100% 60%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 215 25% 22%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 25% 22%;
+    --muted-foreground: 215 25% 70%;
+
+    --accent: 215 100% 22%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 25% 30%;
+    --input: 215 25% 30%;
+    --ring: 210 40% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-primary/20;
+  }
+}
+
+@layer components {
+  .article-card {
+    @apply relative overflow-hidden rounded-xl bg-card transition-all duration-300 ease-apple hover:shadow-lg;
+  }
+  
+  .article-image {
+    @apply aspect-video w-full object-cover transition-transform duration-500 ease-apple;
+  }
+  
+  .article-card:hover .article-image {
+    @apply scale-105;
+  }
+  
+  .source-badge {
+    @apply inline-flex items-center rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground transition-colors duration-300 ease-apple;
+  }
+
+  .category-tag {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors duration-300 ease-apple hover:bg-secondary hover:text-secondary-foreground;
+  }
+
+  .navigation-link {
+    @apply relative px-3 py-2 text-foreground/70 transition-colors duration-300 ease-apple hover:text-foreground;
+  }
+  
+  .navigation-link.active {
+    @apply text-foreground;
+  }
+  
+  .navigation-link.active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-0.5 w-full bg-primary;
+  }
+}
+
+@keyframes placeholder-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.placeholder-pulse {
+  animation: placeholder-pulse 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+}
