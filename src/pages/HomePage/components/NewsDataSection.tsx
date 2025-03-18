@@ -11,7 +11,7 @@ const NewsDataSection = () => {
     isLoading,
     error 
   } = useQuery({
-    queryKey: ['newsDataArticles', filters.dateRange, filters.query, filters.sortBy],
+    queryKey: ['newsDataArticles', filters],
     queryFn: () => fetchNewsDataArticles(filters)
   });
 

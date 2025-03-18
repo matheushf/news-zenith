@@ -40,18 +40,18 @@ export const fetchGuardianArticles = async (filters: NewsFilters): Promise<Artic
       'page-size': '3',
     });
 
-    // Add sort parameter
     if (filters.sortBy) {
-      // Guardian API uses 'newest' and 'oldest' directly
       params.append('order-by', filters.sortBy);
     }
 
-    // Add search query if available
+    if (filters.category !== 'all') {
+      params.append('section', filters.category);
+    }
+
     if (filters.query) {
       params.append('q', filters.query);
     }
 
-    // Add date filters if available
     if (fromDate) params.append('from-date', fromDate);
     if (toDate) params.append('to-date', toDate);
 
@@ -63,12 +63,11 @@ export const fetchGuardianArticles = async (filters: NewsFilters): Promise<Artic
 
     const data: GuardianResponse = await response.json();
 
-    // Transform Guardian articles to match our Article type
     return data.response.results.map((article): Article => ({
       id: article.id,
       title: article.webTitle,
-      description: '', // The Guardian API requires additional fields for description
-      content: '', // Content requires a separate API call
+      description: '',
+      content: '',
       url: article.webUrl,
       image: article.fields.thumbnail,
       publishedAt: article.webPublicationDate,
@@ -76,7 +75,7 @@ export const fetchGuardianArticles = async (filters: NewsFilters): Promise<Artic
         id: 'the-guardian',
         name: 'The Guardian'
       },
-      author: '', // Requires additional API call
+      author: '',
       category: article.sectionName.toLowerCase()
     }));
   } catch (error) {

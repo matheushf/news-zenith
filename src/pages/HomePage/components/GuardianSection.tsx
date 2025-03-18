@@ -11,7 +11,7 @@ const GuardianSection = () => {
     isLoading,
     error 
   } = useQuery({
-    queryKey: ['guardianArticles', filters.dateRange, filters.query, filters.sortBy],
+    queryKey: ['guardianArticles', filters],
     queryFn: () => fetchGuardianArticles(filters)
   });
 

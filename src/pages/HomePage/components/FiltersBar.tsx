@@ -16,6 +16,26 @@ import { Button } from "@/components/ui/button";
 import { cn } from '@/utils/utils';
 import { NewsCategory, DateRangeOption, SortOption } from '@/types/news';
 
+const newsCategories = [
+  { id: 'business', name: 'Business' },
+  { id: 'crime', name: 'Crime' },
+  { id: 'domestic', name: 'Domestic' },
+  { id: 'education', name: 'Education' },
+  { id: 'entertainment', name: 'Entertainment' },
+  { id: 'environment', name: 'Environment' },
+  { id: 'food', name: 'Food' },
+  { id: 'health', name: 'Health' },
+  { id: 'lifestyle', name: 'Lifestyle' },
+  { id: 'politics', name: 'Politics' },
+  { id: 'science', name: 'Science' },
+  { id: 'sports', name: 'Sports' },
+  { id: 'technology', name: 'Technology' },
+  { id: 'top', name: 'Top Stories' },
+  { id: 'tourism', name: 'Tourism' },
+  { id: 'world', name: 'World' },
+  { id: 'other', name: 'Other' }
+];
+
 const FiltersBar = () => {
   const filters = useFiltersStore(state => state.filters);
   const sources = useFiltersStore(state => state.sources);
@@ -23,6 +43,7 @@ const FiltersBar = () => {
   const resetFilters = useFiltersStore(state => state.resetFilters);
   
   const handleCategoryChange = (value: string) => {
+    console.log('oi--', value)
     setFilters({ category: value as NewsCategory });
   };
   
@@ -42,8 +63,7 @@ const FiltersBar = () => {
   
   return (
     <div className="mt-8 flex flex-wrap items-center gap-4 animate-slide-down">
-      {/* Categories */}
-      {/* <Select value={filters.category || 'all'} onValueChange={handleCategoryChange}>
+      <Select value={filters.category || 'all'} onValueChange={handleCategoryChange}>
         <SelectTrigger className="w-[160px] border-none bg-secondary">
           <Filter className="mr-2 h-4 w-4" />
           <SelectValue placeholder="Category" />
@@ -56,7 +76,7 @@ const FiltersBar = () => {
             </SelectItem>
           ))}
         </SelectContent>
-      </Select> */}
+      </Select>
       
       {/* Sources */}
       <Select value={filters.source || 'all'} onValueChange={handleSourceChange}>

@@ -38,9 +38,7 @@ export const fetchNewsApiArticles = async (filters: NewsFilters): Promise<Articl
       language: 'en',
     });
 
-    // Add sort parameter
     if (filters.sortBy) {
-      // NewsAPI uses 'publishedAt' for newest and relevancy for default
       const sortMapping = {
         'newest': 'publishedAt',
         'oldest': 'publishedAt',
@@ -48,21 +46,17 @@ export const fetchNewsApiArticles = async (filters: NewsFilters): Promise<Articl
       };
       params.append('sortBy', sortMapping[filters.sortBy]);
       
-      // For oldest, we need to change the order direction
       if (filters.sortBy === 'oldest') {
         params.append('sortOrder', 'asc');
       }
     }
 
-    // Add search query if available
     if (filters.query) {
       params.append('q', filters.query);
     } else {
-      // NewsAPI requires either q or sources parameter
       params.append('q', '*');
     }
 
-    // Add date filters if available
     if (fromDate) params.append('from', fromDate);
     if (toDate) params.append('to', toDate);
 
@@ -74,7 +68,6 @@ export const fetchNewsApiArticles = async (filters: NewsFilters): Promise<Articl
 
     const data: NewsApiOrgResponse = await response.json();
 
-    // Transform NewsAPI articles to match our Article type
     return data.articles.map((article): Article => ({
       id: article.url,
       title: article.title,

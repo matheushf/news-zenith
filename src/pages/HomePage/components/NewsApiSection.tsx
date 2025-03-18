@@ -11,7 +11,7 @@ const NewsApiSection = () => {
     isLoading,
     error 
   } = useQuery({
-    queryKey: ['newsApiArticles', filters.dateRange, filters.query, filters.sortBy],
+    queryKey: ['newsApiArticles', filters],
     queryFn: () => fetchNewsApiArticles(filters)
   });
 
