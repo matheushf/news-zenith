@@ -4,6 +4,16 @@ import { NewsFilters } from "@/types/news";
 const NEWSDATA_API_KEY = "pub_75157b05a2055df57953b5e243ed0813e321f";
 const NEWSDATA_API_BASE_URL = "https://newsdata.io/api/1";
 
+const NEWSDATA_SOURCE_MAPPING = {
+  'abc-news': 'abc',
+  'bbc-news': 'bbc',
+  'cnn': 'cnn',
+  'bloomberg': 'bloomberg',
+  'business-insider': 'businessinsider',
+  'buzzfeed': 'buzzfeed',
+  'fox-news': 'foxnews'
+};
+
 interface NewsDataResponse {
   status: string;
   totalResults: number;
@@ -44,6 +54,13 @@ export const fetchNewsDataArticles = async (
 
     if (filters.category !== "all") {
       params.append("category", filters.category);
+    }
+
+    if (filters.source && filters.source !== 'all') {
+      const newsDataSource = NEWSDATA_SOURCE_MAPPING[filters.source];
+      if (newsDataSource) {
+        params.append('domain', newsDataSource);
+      }
     }
 
     const response = await fetch(`${url}?${params}`);

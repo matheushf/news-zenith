@@ -30,13 +30,15 @@ export type NewsCategory =
   | 'sports'
   | 'technology';
 
-export type NewsSource = {
-  id: string;
-  name: string;
-  category: NewsCategory;
-  language: string;
-  country: string;
-};
+export type NewsSource = 
+  | 'all'
+  | 'abc-news'
+  | 'bbc-news'
+  | 'cnn'
+  | 'bloomberg'
+  | 'business-insider'
+  | 'buzzfeed'
+  | 'fox-news';
 
 export type SortOption = 'newest' | 'oldest' | 'relevance';
 
@@ -44,8 +46,8 @@ export type DateRangeOption = 'today' | 'week' | 'month' | 'custom';
 
 export interface NewsFilters {
   query: string;
-  category: NewsCategory | '';
-  source: string;
+  category: NewsCategory;
+  source: NewsSource;
   dateRange: DateRangeOption;
   sortBy: SortOption;
   startDate?: string;

@@ -4,6 +4,15 @@ import { getDateRangeFromOption } from '@/utils/dateUtils';
 const GUARDIAN_API_KEY = 'a215c503-45ea-48e2-8f50-b484989d0182';
 const GUARDIAN_API_BASE_URL = 'https://content.guardianapis.com';
 
+const GUARDIAN_SOURCE_MAPPING = {
+  'bbc-news': 'bbc',
+  'cnn': 'cnn',
+  'bloomberg': 'bloomberg',
+  'business-insider': 'business-insider',
+  'buzzfeed': 'buzzfeed',
+  'fox-news': 'fox-news'
+};
+
 interface GuardianResponse {
   response: {
     status: string;
@@ -25,6 +34,9 @@ interface GuardianArticle {
   fields: {
     thumbnail: string;
   }
+  references: {
+    author: string;
+  }
 }
 
 export const fetchGuardianArticles = async (filters: NewsFilters): Promise<Article[]> => {
@@ -37,6 +49,7 @@ export const fetchGuardianArticles = async (filters: NewsFilters): Promise<Artic
     const params = new URLSearchParams({
       'api-key': GUARDIAN_API_KEY,
       'show-fields': 'thumbnail,trailText',
+      'show-references': 'author',
       'page-size': '3',
     });
 
@@ -75,7 +88,7 @@ export const fetchGuardianArticles = async (filters: NewsFilters): Promise<Artic
         id: 'the-guardian',
         name: 'The Guardian'
       },
-      author: '',
+      author: article.references.author,
       category: article.sectionName.toLowerCase()
     }));
   } catch (error) {

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from '@/utils/utils';
-import { NewsCategory, DateRangeOption, SortOption } from '@/types/news';
+import { NewsCategory, DateRangeOption, SortOption, NewsSource } from '@/types/news';
 
 const newsCategories = [
   { id: 'business', name: 'Business' },
@@ -36,6 +36,16 @@ const newsCategories = [
   { id: 'other', name: 'Other' }
 ];
 
+const newsSources = [
+  { id: 'abc-news', name: 'ABC News' },
+  { id: 'bbc-news', name: 'BBC News' },
+  { id: 'cnn', name: 'CNN' },
+  { id: 'bloomberg', name: 'Bloomberg' },
+  { id: 'business-insider', name: 'Business Insider' },
+  { id: 'buzzfeed', name: 'BuzzFeed' },
+  { id: 'fox-news', name: 'Fox News' }
+];
+
 const FiltersBar = () => {
   const filters = useFiltersStore(state => state.filters);
   const sources = useFiltersStore(state => state.sources);
@@ -43,12 +53,11 @@ const FiltersBar = () => {
   const resetFilters = useFiltersStore(state => state.resetFilters);
   
   const handleCategoryChange = (value: string) => {
-    console.log('oi--', value)
     setFilters({ category: value as NewsCategory });
   };
   
   const handleSourceChange = (value: string) => {
-    setFilters({ source: value });
+    setFilters({ source: value as NewsSource });
   };
   
   const handleDateRangeChange = (value: string) => {
@@ -81,11 +90,12 @@ const FiltersBar = () => {
       {/* Sources */}
       <Select value={filters.source || 'all'} onValueChange={handleSourceChange}>
         <SelectTrigger className="w-[160px] border-none bg-secondary">
+          <Filter className="mr-2 h-4 w-4" />
           <SelectValue placeholder="Source" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All Sources</SelectItem>
-          {sources.map((source) => (
+          {newsSources.map((source) => (
             <SelectItem key={source.id} value={source.id}>
               {source.name}
             </SelectItem>

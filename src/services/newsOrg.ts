@@ -33,10 +33,15 @@ export const fetchNewsApiArticles = async (filters: NewsFilters): Promise<Articl
     const url = new URL(`${NEWS_API_BASE_URL}/everything`);
     const params = new URLSearchParams({
       apiKey: NEWS_API_KEY,
-      sources: 'abc-news,bbc-news,cnn,bloomberg,business-insider,buzzfeed,fox-news',
       pageSize: '3',
       language: 'en',
     });
+
+    if (filters.source && filters.source !== 'all') {
+      params.append('sources', filters.source);
+    } else {
+      params.append('sources', 'abc-news,bbc-news,cnn,bloomberg,business-insider,buzzfeed,fox-news');
+    }
 
     if (filters.sortBy) {
       const sortMapping = {
