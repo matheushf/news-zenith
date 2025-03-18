@@ -12,23 +12,21 @@ export const formatRelativeTime = (dateString: string): string => {
 };
 
 export const getDateRangeFromOption = (option: string): { start: Date | null, end: Date } => {
+  const date = new Date();
   const end = new Date();
   
   switch (option) {
     case 'today':
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return { start: today, end };
+      date.setHours(0, 0, 0, 0);
+      return { start: date, end };
     
     case 'week':
-      const week = new Date();
-      week.setDate(week.getDate() - 7);
-      return { start: week, end };
+      date.setDate(date.getDate() - 7);
+      return { start: date, end };
     
     case 'month':
-      const month = new Date();
-      month.setMonth(month.getMonth() - 1);
-      return { start: month, end };
+      date.setMonth(date.getMonth() - 1);
+      return { start: date, end };
     
     case 'custom':
       return { start: null, end };

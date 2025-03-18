@@ -1,33 +1,15 @@
 import React, { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchArticles } from '@/services/newsApi';
 import SearchBar from '@/pages/HomePage/components/SearchBar';
 import FiltersBar from '@/pages/HomePage/components/FiltersBar';
-import ArticlesList from '@/components/ArticlesList';
-import { useNewsStore } from '@/store/useNewsStore';
+import GuardianSection from './components/GuardianSection';
+import NewsDataSection from './components/NewsDataSection';
+import NewsApiSection from './components/NewsApiSection';
 
 const HomePage: React.FC = () => {
-  const filters = useNewsStore(state => state.filters);
-  const initializeStore = useNewsStore(state => state.initializeStore);
-  
-  // Initialize the store when the component mounts
   useEffect(() => {
-    initializeStore();
     document.title = "News - Home";
-  }, [initializeStore]);
-  
-  // Fetch articles with filters
-  const { 
-    data,
-    isLoading, 
-    error 
-  } = useQuery({
-    queryKey: ['articles', filters],
-    queryFn: () => fetchArticles(filters)
-  });
+  }, []);
 
-  const articles = data?.articles || [];
-  
   return (
     <div className="container mx-auto px-4 py-20">
       <div className="mt-20 text-center animate-fade-in">
@@ -45,7 +27,9 @@ const HomePage: React.FC = () => {
       
       <FiltersBar />
       
-      <ArticlesList articles={articles} isLoading={isLoading} error={error as Error} />
+      <GuardianSection />
+      <NewsDataSection />
+      <NewsApiSection />
     </div>
   );
 };

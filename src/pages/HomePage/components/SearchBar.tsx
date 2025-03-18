@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
-import { useNewsStore } from '@/store/useNewsStore';
+import { useFiltersStore } from '@/pages/HomePage/store/useFiltersStore';
 
 const SearchBar = () => {
-  const setFilters = useNewsStore(state => state.setFilters);
-  const currentQuery = useNewsStore(state => state.filters.query);
+  const setFilters = useFiltersStore(state => state.setFilters);
+  const currentQuery = useFiltersStore(state => state.filters.query);
   
   const [query, setQuery] = useState(currentQuery);
   

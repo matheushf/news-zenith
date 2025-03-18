@@ -1,6 +1,5 @@
 import { Calendar, Filter, SlidersHorizontal } from 'lucide-react';
-import { useNewsStore } from '@/store/useNewsStore';
-import { newsCategories } from '@/services/newsApi';
+import { useFiltersStore } from '@/pages/HomePage/store/useFiltersStore';
 import {
   Select,
   SelectContent,
@@ -18,10 +17,10 @@ import { cn } from '@/utils/utils';
 import { NewsCategory, DateRangeOption, SortOption } from '@/types/news';
 
 const FiltersBar = () => {
-  const filters = useNewsStore(state => state.filters);
-  const sources = useNewsStore(state => state.sources);
-  const setFilters = useNewsStore(state => state.setFilters);
-  const resetFilters = useNewsStore(state => state.resetFilters);
+  const filters = useFiltersStore(state => state.filters);
+  const sources = useFiltersStore(state => state.sources);
+  const setFilters = useFiltersStore(state => state.setFilters);
+  const resetFilters = useFiltersStore(state => state.resetFilters);
   
   const handleCategoryChange = (value: string) => {
     setFilters({ category: value as NewsCategory });
@@ -44,7 +43,7 @@ const FiltersBar = () => {
   return (
     <div className="mt-8 flex flex-wrap items-center gap-4 animate-slide-down">
       {/* Categories */}
-      <Select value={filters.category || 'all'} onValueChange={handleCategoryChange}>
+      {/* <Select value={filters.category || 'all'} onValueChange={handleCategoryChange}>
         <SelectTrigger className="w-[160px] border-none bg-secondary">
           <Filter className="mr-2 h-4 w-4" />
           <SelectValue placeholder="Category" />
@@ -57,7 +56,7 @@ const FiltersBar = () => {
             </SelectItem>
           ))}
         </SelectContent>
-      </Select>
+      </Select> */}
       
       {/* Sources */}
       <Select value={filters.source || 'all'} onValueChange={handleSourceChange}>
