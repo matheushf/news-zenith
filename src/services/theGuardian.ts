@@ -1,17 +1,8 @@
 import { Article, NewsFilters } from '@/types/news';
 import { getDateRangeFromOption } from '@/utils/dateUtils';
 
-const GUARDIAN_API_KEY = 'a215c503-45ea-48e2-8f50-b484989d0182';
-const GUARDIAN_API_BASE_URL = 'https://content.guardianapis.com';
-
-const GUARDIAN_SOURCE_MAPPING = {
-  'bbc-news': 'bbc',
-  'cnn': 'cnn',
-  'bloomberg': 'bloomberg',
-  'business-insider': 'business-insider',
-  'buzzfeed': 'buzzfeed',
-  'fox-news': 'fox-news'
-};
+const GUARDIAN_API_KEY = import.meta.env.VITE_GUARDIAN_API_KEY;
+const GUARDIAN_API_BASE_URL = import.meta.env.VITE_GUARDIAN_API_BASE_URL;
 
 interface GuardianResponse {
   response: {

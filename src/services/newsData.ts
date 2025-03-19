@@ -1,8 +1,8 @@
 import { Article } from "@/types/news";
 import { NewsFilters } from "@/types/news";
 
-const NEWSDATA_API_KEY = "pub_75157b05a2055df57953b5e243ed0813e321f";
-const NEWSDATA_API_BASE_URL = "https://newsdata.io/api/1";
+const NEWSDATA_API_KEY = import.meta.env.VITE_NEWS_DATA_API_KEY;
+const NEWSDATA_API_BASE_URL = import.meta.env.VITE_NEWS_DATA_API_BASE_URL;
 
 const NEWSDATA_SOURCE_MAPPING = {
   'abc-news': 'abc',

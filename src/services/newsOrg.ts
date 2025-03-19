@@ -1,8 +1,8 @@
 import { Article, NewsFilters } from '@/types/news';
 import { getDateRangeFromOption } from '@/utils/dateUtils';
 
-const NEWS_API_KEY = '1a3a325944c74a708a7b2416a08aa3b2';
-const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
+const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+const NEWS_API_BASE_URL = import.meta.env.VITE_NEWS_API_BASE_URL;
 
 interface NewsApiOrgResponse {
   status: string;
