@@ -24,9 +24,6 @@ const NewsDataSection = () => {
             Trending on NewsData
           </span>
         </h2>
-        <button className="text-sm text-primary hover:underline">
-          View all NewsData articles →
-        </button>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {isLoading ? (
