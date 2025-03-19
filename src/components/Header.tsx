@@ -19,7 +19,7 @@ const Header = () => {
   
   const navigation = [
     { name: 'Home', href: '/', icon: Home },
-    { name: 'My Feed', href: '/my-feed', icon: User },
+    { name: 'Preferences', href: '/preferences', icon: User },
   ];
   
   const isActive = (path: string) => {

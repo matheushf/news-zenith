@@ -3,6 +3,7 @@ import {
   NewsFilters, 
   NewsSource
 } from '@/types/news';
+import useStorage from '@/hooks/use-storage';
 
 const defaultFilters: NewsFilters = {
   query: '',
@@ -15,20 +16,24 @@ const defaultFilters: NewsFilters = {
 interface NewsState {
   filters: NewsFilters;
   sources: NewsSource[];
-  
   setFilters: (filters: Partial<NewsFilters>) => void;
   resetFilters: () => void;
 }
 
-export const useFiltersStore = create<NewsState>((set, get) => ({
-  // Initial state
-  filters: defaultFilters,
-  sources: [],
-  
-  // Actions
-  setFilters: (newFilters) => set(state => ({ 
-    filters: { ...state.filters, ...newFilters }
-  })),
-  
-  resetFilters: () => set({ filters: defaultFilters }),
-})); 
+export const useFiltersStore = create<NewsState>((set, get) => {
+  return {
+    filters: {
+      ...defaultFilters,
+      category: defaultFilters.category,
+      source: defaultFilters.source,
+    },
+    sources: [],
+    
+    // Actions
+    setFilters: (newFilters) => set(state => ({ 
+      filters: { ...state.filters, ...newFilters }
+    })),
+    
+    resetFilters: () => set({ filters: defaultFilters }),
+  };
+}); 
